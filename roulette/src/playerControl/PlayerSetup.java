@@ -12,7 +12,7 @@ public class PlayerSetup {
 		for(int i=0; i<numPlayers; i++) {
 			String name = getPlayerName(in);
 			long wallet = getPlayerStartWallet(in);
-			players.add(new Player(name, wallet));
+			players.add(new Player(name, wallet, (long) i));
 		}
 		
 		return players;
