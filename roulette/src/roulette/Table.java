@@ -1,10 +1,18 @@
 package roulette;
 
 import java.util.Arrays;
+import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.Set;
 
+import roulette.bettingOpts.Colors;
+
 public class Table {
+	
+	public static enum resultsOrder {
+		Section, Half, Color, Column, EvenOrOdd
+	};
+	
 	private Set<Integer> redColorSet = new HashSet<>();
 	private Set<Integer> blackColorSet = new HashSet<>();
 	
@@ -25,22 +33,21 @@ public class Table {
 	 * - Column Number (0, 1, 2, 3) (-1 Offset)<br>
 	 * - Even/Odd (-1, 0=Even, 1=Odd)<br>
 	 * 
-	 * @param num - The number to get Results for
-	 * @return Array of results as described above
-	 * @throws Exception - If num is out of bounds for the table, a.k.a. -1 or 37
+	 * @param numLandedOn - The number the ball landed on
+	 * @return Result array corresponding to the number that was landed on
+	 * @throws Exception If the number is out of bounds for the board
 	 */
-	public int[] getResults(final int chosenNum, final int num) throws Exception {
-		if(num < 0 || num > 36) {
+	public int[] getResults(final int numLandedOn) throws Exception {
+		if(numLandedOn < 0 || numLandedOn > 36) {
 			throw new Exception("WTF");
 		}
 		
 		int[] results = new int[6];
-		results[0] = getSection(num);
-		results[1] = getCurrentHalf(num);
-		results[2] = getColor(num).ordinal();
-		results[3] = getColumnNum(num);
-		results[4] = getEvenOrOdd(num);
-		results[5] = getIfChosenNumIsCurrentNum(chosenNum, num);
+		results[0] = getSection(numLandedOn);
+		results[1] = getCurrentHalf(numLandedOn);
+		results[2] = getColor(numLandedOn).ordinal();
+		results[3] = getColumnNum(numLandedOn);
+		results[4] = getEvenOrOdd(numLandedOn);
 		
 		return results;
 	}
