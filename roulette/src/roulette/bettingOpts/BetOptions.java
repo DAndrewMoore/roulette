@@ -1,5 +1,5 @@
 package roulette.bettingOpts;
 
 public enum BetOptions {
-	Color, EvenOrOdd, SpecificNumbers, SectionNumber, ColomnNumber, Half
+	Color, EvenOrOdd, SingleNumber, SpecificNumbers, SectionNumber, ColomnNumber, Half
 }
