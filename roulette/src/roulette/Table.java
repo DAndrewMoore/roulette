@@ -2,16 +2,14 @@ package roulette;
 
 import java.util.Arrays;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
+import roulette.bettingOpts.BetOptions;
 import roulette.bettingOpts.Colors;
 
 public class Table {
-	
-	public static enum resultsOrder {
-		Section, Half, Color, Column, EvenOrOdd
-	};
 	
 	private Set<Integer> redColorSet = new HashSet<>();
 	private Set<Integer> blackColorSet = new HashSet<>();
@@ -37,17 +35,17 @@ public class Table {
 	 * @return Result array corresponding to the number that was landed on
 	 * @throws Exception If the number is out of bounds for the board
 	 */
-	public int[] getResults(final int numLandedOn) throws Exception {
+	public HashMap<BetOptions, Integer> getResults(final int numLandedOn) throws Exception {
 		if(numLandedOn < 0 || numLandedOn > 36) {
-			throw new Exception("WTF");
+			throw new Exception("Invalid number given");
 		}
 		
-		int[] results = new int[6];
-		results[0] = getSection(numLandedOn);
-		results[1] = getCurrentHalf(numLandedOn);
-		results[2] = getColor(numLandedOn).ordinal();
-		results[3] = getColumnNum(numLandedOn);
-		results[4] = getEvenOrOdd(numLandedOn);
+		HashMap<BetOptions, Integer> results = new HashMap<>();
+		results.put(BetOptions.SectionNumber, getSection(numLandedOn));
+		results.put(BetOptions.Half, getCurrentHalf(numLandedOn));
+		results.put(BetOptions.Color, getColor(numLandedOn).ordinal());
+		results.put(BetOptions.ColomnNumber, getColumnNum(numLandedOn));
+		results.put(BetOptions.EvenOrOdd, getEvenOrOdd(numLandedOn));
 		
 		return results;
 	}
