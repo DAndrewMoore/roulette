@@ -1,5 +1,6 @@
 package gameControl;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
@@ -7,6 +8,7 @@ import playerControl.Player;
 import playerControl.PlayerSetup;
 import playerControl.TakeBet;
 import roulette.Table;
+import roulette.bettingOpts.BetOptions;
 
 public class Main {
 	
@@ -14,10 +16,12 @@ public class Main {
 	private static final Table tbl = new Table();
 
 	public static void main(String[] args) throws Exception {
-		
+		for(int i=0; i<100; i++) {
+			System.out.println(tbl.getRandomNumber());
+		}
 	}
 	
-	public static void driver() {
+	public static void driver() throws Exception {
 		List<Player> playerList = PlayerSetup.createListOfPlayers(in);
 		while(!playerList.isEmpty()) {
 			// Take bets from current players
@@ -32,10 +36,15 @@ public class Main {
 			}
 			
 			// Get the random number
+			int num = tbl.getRandomNumber();
 			
 			// Calculate results
+			HashMap<BetOptions, Integer> results = tbl.getResults(num);
 			
 			// Distribute bets
+			for(int curPlayerIdx=0; curPlayerIdx < playerList.size(); curPlayerIdx++) {
+				playerList.get(curPlayerIdx).distributeBetStuff(results, num);
+			}
 		}
 	}
 	

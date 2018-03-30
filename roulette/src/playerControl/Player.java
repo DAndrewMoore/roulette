@@ -1,9 +1,12 @@
 package playerControl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 import roulette.PlacedBet;
+import roulette.bettingOpts.BetOptions;
 
 public class Player {
 
@@ -52,6 +55,13 @@ public class Player {
 		System.out.println("This bet's unique identifier is "+name+(placedBet.size()+1));
 		placedBet.add(pb);
 		currentBetAmount += pb.getBetAmount();
+	}
+	
+	public void distributeBetStuff(HashMap<BetOptions, Integer> results, int numberRolled) {
+		int total = 0;
+		for(PlacedBet bet : placedBet) {
+			total += bet.returnResult(results, numberRolled);
+		}
 	}
 	
 	public String toString() {

@@ -11,27 +11,27 @@ public class Odds {
 	/**
 	 * Red VS Black
 	 */
-	public static int colorWin = 1;
+	public static int colorWin = 2;
 	
 	/**
 	 * Even or Odd
 	 */
-	public static int evenOrOddWin = 1;
+	public static int evenOrOddWin = 2;
 	
 	/**
 	 * Within first or last half of numbers (not respective of name)
 	 */
-	public static int highLowWin = 1;
+	public static int highLowWin = 2;
 	
 	/**
 	 * Line of 12 numbers
 	 */
-	public static int columnWin = 2;
+	public static int columnWin = 3;
 	
 	/**
 	 * On the first, middle, or last section
 	 */
-	public static int sectionWin = 2;
+	public static int sectionWin = 3;
 	
 	/**
 	 * On six numbers

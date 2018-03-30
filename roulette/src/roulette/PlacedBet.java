@@ -1,5 +1,7 @@
 package roulette;
 
+import java.util.HashMap;
+
 import roulette.bettingOpts.BetOptions;
 import roulette.bettingOpts.Colors;
 import roulette.bettingOpts.Columns;
@@ -34,7 +36,7 @@ public class PlacedBet {
 	}
 	
 	public PlacedBet(Columns column, long amt) {
-		this.betCategory = BetOptions.ColomnNumber;
+		this.betCategory = BetOptions.ColumnNumber;
 		this.column = column;
 		this.amount = amt;
 	}
@@ -61,9 +63,24 @@ public class PlacedBet {
 		return amount;
 	}
 	
-	public int returnResult(int[] outcome) {
+	public int returnResult(HashMap<BetOptions, Integer> results, int numberRolled) {
 		int total = 0;
-		
+		switch(betCategory) {
+		case Color:
+		break;
+		case EvenOrOdd:
+		break;
+		case SpecificNumbers:
+		break;
+		case SectionNumber:
+		break;
+		case ColumnNumber:
+		break;
+		case Half:
+		break;
+		default:
+		break;
+		}
 		
 		
 		return total;

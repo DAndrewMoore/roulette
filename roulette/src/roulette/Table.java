@@ -1,7 +1,7 @@
 package roulette;
 
+import java.security.SecureRandom;
 import java.util.Arrays;
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
@@ -14,12 +14,24 @@ public class Table {
 	private Set<Integer> redColorSet = new HashSet<>();
 	private Set<Integer> blackColorSet = new HashSet<>();
 	
+	private SecureRandom random = new SecureRandom();
+	
 	/**
 	 * Default constructor for the table
 	 */
 	public Table() {
 		redColorSet.addAll(Arrays.asList(new Integer[] {1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36}));
 		blackColorSet.addAll(Arrays.asList(new Integer[] {2, 4, 6, 8, 10, 11, 13, 15, 17, 20, 22, 24, 26, 28, 29, 31, 33, 35}));
+	}
+	
+	public int getRandomNumber() {
+		int randomNum = -1;
+		byte[] randBytes = new byte[7];
+		random.nextBytes(randBytes);
+		for(int i=0; i<7; i++) {
+			randomNum += (randomNum << 8) + (randBytes[i] & 0xff);
+		}
+		return Math.abs(randomNum % 37);
 	}
 	
 	/**
@@ -44,7 +56,7 @@ public class Table {
 		results.put(BetOptions.SectionNumber, getSection(numLandedOn));
 		results.put(BetOptions.Half, getCurrentHalf(numLandedOn));
 		results.put(BetOptions.Color, getColor(numLandedOn).ordinal());
-		results.put(BetOptions.ColomnNumber, getColumnNum(numLandedOn));
+		results.put(BetOptions.ColumnNumber, getColumnNum(numLandedOn));
 		results.put(BetOptions.EvenOrOdd, getEvenOrOdd(numLandedOn));
 		
 		return results;
