@@ -20,6 +20,7 @@ public class Main {
 	public static void driver() {
 		List<Player> playerList = PlayerSetup.createListOfPlayers(in);
 		while(!playerList.isEmpty()) {
+			// Take bets from current players
 			for(int curPlayerIdx=0; curPlayerIdx < playerList.size(); curPlayerIdx++) {
 				Player curPlayer = playerList.get(curPlayerIdx);
 				if(curPlayer.getCanBet()) {
@@ -29,6 +30,12 @@ public class Main {
 					curPlayerIdx--;
 				}
 			}
+			
+			// Get the random number
+			
+			// Calculate results
+			
+			// Distribute bets
 		}
 	}
 	
