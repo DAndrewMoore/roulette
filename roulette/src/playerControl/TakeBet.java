@@ -1,11 +1,15 @@
 package playerControl;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import roulette.PlacedBet;
 import roulette.bettingOpts.Colors;
 import roulette.bettingOpts.Columns;
 import roulette.bettingOpts.EvenOrOdd;
+import roulette.bettingOpts.Halves;
+import roulette.bettingOpts.Sections;
 
 public class TakeBet {
 	
@@ -76,7 +80,7 @@ public class TakeBet {
 		case 3:
 			// Column
 			do {
-				System.out.print("Input the column, first second or third --> ");
+				System.out.print("Input the column [first, second, third] --> ");
 				input = in.nextLine();
 			} while(!(input.equalsIgnoreCase("first") && input.equalsIgnoreCase("second") && input.equalsIgnoreCase("third")));
 			
@@ -95,12 +99,72 @@ public class TakeBet {
 		break;
 		case 4:
 			// Section
+			do {
+				System.out.print("Input the section third [first, second, third] --> ");
+				input = in.nextLine();
+			} while(!(input.equalsIgnoreCase("first") && input.equalsIgnoreCase("second") && input.equalsIgnoreCase("third")));
+			
+			Sections sectionChoice = null;
+			if(input.equalsIgnoreCase("first")) {
+				sectionChoice = Sections.First;
+			} else if(input.equalsIgnoreCase("second")) {
+				sectionChoice = Sections.Second;
+			} else {
+				sectionChoice = Sections.Third;
+			}
+			
+			amount = getAmount(player, in);
+			
+			player.addBet(new PlacedBet(sectionChoice, amount));
 		break;
 		case 5:
 			// Numbers
+			do {
+				System.out.print("Input a list of numbers [0 1 2 3...] --> ");
+				input = in.nextLine();
+			} while(!input.equals(""));
+			
+			String[] chosenNumberString = input.split(" ");
+			List<Integer> chosenNumberInts = new ArrayList<Integer>();
+			for(int i=0; i<chosenNumberString.length; i++) {
+				try {
+					int tempInt = Integer.parseInt(chosenNumberString[i]);
+					if(tempInt >= 0 && tempInt <= 36) {
+						chosenNumberInts.add(tempInt);
+					} else {
+						System.out.println(tempInt+" is out of range and was not added");
+					}
+				} catch(Exception e) {
+					System.err.println(chosenNumberString[i]+" was not added since it's not a number");
+				}
+			}
+			
+			if(chosenNumberInts.size() != 0) {
+				amount = getAmount(player, in);
+				
+				player.addBet(new PlacedBet((Integer[]) chosenNumberInts.toArray(), amount));
+			} else {
+				System.err.println("No bet added, no numbers within table range were input");
+			}
 		break;
 		case 6:
 			// Half
+			do {
+				System.out.print("Input the half [first, second] --> ");
+				input = in.nextLine();
+			} while(!(input.equalsIgnoreCase("first") && input.equalsIgnoreCase("second")));
+			
+			Halves chosenHalf = null;
+			if(input.equalsIgnoreCase("first")) {
+				chosenHalf = Halves.First;
+			} else {
+				chosenHalf = Halves.Second;
+			}
+			
+			amount = getAmount(player, in);
+			
+			player.addBet(new PlacedBet(chosenHalf, amount));
+			
 		break;
 		default:
 		}

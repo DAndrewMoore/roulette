@@ -49,6 +49,7 @@ public class Player {
 	}
 	
 	public void addBet(PlacedBet pb) {
+		System.out.println("This bet's unique identifier is "+name+(placedBet.size()+1));
 		placedBet.add(pb);
 		currentBetAmount += pb.getBetAmount();
 	}

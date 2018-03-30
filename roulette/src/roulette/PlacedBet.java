@@ -13,7 +13,7 @@ public class PlacedBet {
 	private long amount;
 	
 	// Optional Fields
-	private int[] chosenNumbers;
+	private Integer[] chosenNumbers;
 	private Colors chosenColor;
 	private Columns column;
 	private Sections section;
@@ -27,7 +27,7 @@ public class PlacedBet {
 		this.amount = amt;
 	}
 	
-	public PlacedBet(int[] chosenNumbers, long amt) {
+	public PlacedBet(Integer[] chosenNumbers, long amt) {
 		this.betCategory = BetOptions.SpecificNumbers;
 		this.chosenNumbers = chosenNumbers;
 		this.amount = amt;
