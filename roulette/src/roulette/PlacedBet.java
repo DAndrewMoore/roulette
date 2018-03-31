@@ -64,32 +64,50 @@ public class PlacedBet {
 		return amount;
 	}
 	
-	public int returnResult(HashMap<BetOptions, Integer> results, int numberRolled) {
-		int total = 0;
+	public long returnResult(HashMap<BetOptions, Integer> results, int numberRolled) {
+		long total = 0;
 		switch(betCategory) {
 		case Color:
-			
-			total = Odds.colorWin;
+			if(chosenColor.ordinal() == results.get(betCategory)) {
+				total = Odds.colorWin * amount;
+			}
 		break;
 		case EvenOrOdd:
-			total = Odds.evenOrOddWin;
+			if(evenOrOdd.ordinal() == results.get(betCategory)) {
+				total = Odds.evenOrOddWin * amount;
+			}
 		break;
 		case SpecificNumbers:
-			
+			for(int i=0; i<chosenNumbers.length; i++) {
+				if(chosenNumbers[i] == numberRolled) {
+					total += Odds.straightNumber * multiNumBetAmt[i];
+				} else {
+					total += -1 * multiNumBetAmt[i];
+				}
+			}
 		break;
 		case SectionNumber:
-			total = Odds.sectionWin;
+			if(section.ordinal() == results.get(betCategory)) {
+				total = Odds.sectionWin * amount;
+			}
 		break;
 		case ColumnNumber:
-			total = Odds.columnWin;
+			if(column.ordinal() == results.get(betCategory)) {
+				total = Odds.columnWin * amount;
+			}
 		break;
 		case Half:
-			total = Odds.highLowWin;
+			if(half.ordinal() == results.get(betCategory)) {
+				total = Odds.highLowWin * amount;
+			}
 		break;
 		default:
 		break;
 		}
 		
+		if(total == 0L && betCategory != BetOptions.SpecificNumbers) {
+			total = -1 * amount;
+		}
 		
 		return total;
 	}
