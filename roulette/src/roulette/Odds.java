@@ -11,55 +11,30 @@ public class Odds {
 	/**
 	 * Red VS Black
 	 */
-	public static int colorWin = 2;
+	public static final long colorWin = 1;
 	
 	/**
 	 * Even or Odd
 	 */
-	public static int evenOrOddWin = 2;
+	public static final long evenOrOddWin = 1;
 	
 	/**
 	 * Within first or last half of numbers (not respective of name)
 	 */
-	public static int highLowWin = 2;
+	public static final long highLowWin = 1;
 	
 	/**
 	 * Line of 12 numbers
 	 */
-	public static int columnWin = 3;
+	public static final long columnWin = 2;
 	
 	/**
 	 * On the first, middle, or last section
 	 */
-	public static int sectionWin = 3;
-	
-	/**
-	 * On six numbers
-	 */
-	public static int lineBet = 5;
-	
-	/**
-	 * On five numbers
-	 */
-	public static int fiveNum = 6;
-	
-	/**
-	 * On four numbers
-	 */
-	public static int squareNum = 8;
-	
-	/**
-	 * On three numbers
-	 */
-	public static int threeNum = 11;
-	
-	/**
-	 * On two numbers
-	 */
-	public static int twoNumber = 17;
-	
+	public static final long sectionWin = 2;
+		
 	/**
 	 * On one number
 	 */
-	public static int straightNumber = 35;
+	public static final long straightNumber = 35;
 }
