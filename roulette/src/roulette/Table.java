@@ -125,12 +125,4 @@ public class Table {
 			return num % 2;
 		}
 	}
-	
-	private int getIfChosenNumIsCurrentNum(final int chosenNum, final int currentNum) {
-		if(chosenNum == currentNum) {
-			return 1;
-		} else {
-			return 0;
-		}
-	}
 }

@@ -13,6 +13,7 @@ public class PlacedBet {
 	// Fields used with every bet
 	private BetOptions betCategory;
 	private long amount;
+	private Long[] multiNumBetAmt;
 	
 	// Optional Fields
 	private Integer[] chosenNumbers;
@@ -29,10 +30,10 @@ public class PlacedBet {
 		this.amount = amt;
 	}
 	
-	public PlacedBet(Integer[] chosenNumbers, long amt) {
+	public PlacedBet(Integer[] chosenNumbers, Long[] amt) {
 		this.betCategory = BetOptions.SpecificNumbers;
 		this.chosenNumbers = chosenNumbers;
-		this.amount = amt;
+		this.multiNumBetAmt = amt;
 	}
 	
 	public PlacedBet(Columns column, long amt) {
@@ -67,16 +68,23 @@ public class PlacedBet {
 		int total = 0;
 		switch(betCategory) {
 		case Color:
+			
+			total = Odds.colorWin;
 		break;
 		case EvenOrOdd:
+			total = Odds.evenOrOddWin;
 		break;
 		case SpecificNumbers:
+			
 		break;
 		case SectionNumber:
+			total = Odds.sectionWin;
 		break;
 		case ColumnNumber:
+			total = Odds.columnWin;
 		break;
 		case Half:
+			total = Odds.highLowWin;
 		break;
 		default:
 		break;

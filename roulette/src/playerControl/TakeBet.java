@@ -119,33 +119,23 @@ public class TakeBet {
 		break;
 		case 5:
 			// Numbers
+			List<Integer> chosenNumberList = new ArrayList<>();
+			List<Long> betAmounts = new ArrayList<Long>();
 			do {
-				System.out.print("Input a list of numbers [0 1 2 3...] --> ");
+				System.out.print("Input a number [0 .. 36] or stop to finish betting --> ");
 				input = in.nextLine();
-			} while(!input.equals(""));
-			
-			String[] chosenNumberString = input.split(" ");
-			List<Integer> chosenNumberInts = new ArrayList<Integer>();
-			for(int i=0; i<chosenNumberString.length; i++) {
-				try {
-					int tempInt = Integer.parseInt(chosenNumberString[i]);
-					if(tempInt >= 0 && tempInt <= 36) {
-						chosenNumberInts.add(tempInt);
-					} else {
-						System.out.println(tempInt+" is out of range and was not added");
+				if(input.matches("[\\d]+")) {
+					try {
+						chosenNumberList.add(Integer.parseInt(input));
+					} catch(Exception e) {
+						System.err.println("Could not convert selection to integer");
 					}
-				} catch(Exception e) {
-					System.err.println(chosenNumberString[i]+" was not added since it's not a number");
+					betAmounts.add(getAmount(player, in));
 				}
-			}
+			} while(!input.equalsIgnoreCase("stop"));
 			
-			if(chosenNumberInts.size() != 0) {
-				amount = getAmount(player, in);
-				
-				player.addBet(new PlacedBet((Integer[]) chosenNumberInts.toArray(), amount));
-			} else {
-				System.err.println("No bet added, no numbers within table range were input");
-			}
+			player.addBet(new PlacedBet( (Integer[]) chosenNumberList.toArray(), (Long[]) betAmounts.toArray()));
+			
 		break;
 		case 6:
 			// Half

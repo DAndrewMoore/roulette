@@ -58,9 +58,8 @@ public class Player {
 	}
 	
 	public void distributeBetStuff(HashMap<BetOptions, Integer> results, int numberRolled) {
-		int total = 0;
 		for(PlacedBet bet : placedBet) {
-			total += bet.returnResult(results, numberRolled);
+			holdings += bet.returnResult(results, numberRolled);
 		}
 	}
 	
