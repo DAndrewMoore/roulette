@@ -47,7 +47,7 @@ public class TakeBet {
 			do {
 				System.out.print("Input either even or odd --> ");
 				input = in.nextLine();
-			} while(!input.equalsIgnoreCase("even") || !input.equalsIgnoreCase("odd"));
+			} while(!(input.equalsIgnoreCase("even") ^ input.equalsIgnoreCase("odd")));
 			
 			EvenOrOdd evenOrOddChoice = null;
 			if(input.equalsIgnoreCase("even")) {
@@ -64,7 +64,7 @@ public class TakeBet {
 			do {
 				System.out.print("Input either red or black --> ");
 				input = in.nextLine();
-			} while(!input.equalsIgnoreCase("red") || !input.equalsIgnoreCase("black"));
+			} while(!(input.equalsIgnoreCase("red") ^ input.equalsIgnoreCase("black")));
 			
 			Colors colorChoice = null;
 			if(input.equalsIgnoreCase("red")) {
@@ -82,7 +82,7 @@ public class TakeBet {
 			do {
 				System.out.print("Input the column [first, second, third] --> ");
 				input = in.nextLine();
-			} while(!(input.equalsIgnoreCase("first") && input.equalsIgnoreCase("second") && input.equalsIgnoreCase("third")));
+			} while(!(input.equalsIgnoreCase("first") ^ input.equalsIgnoreCase("second") ^ input.equalsIgnoreCase("third")));
 			
 			Columns columnChoice = null;
 			if(input.equalsIgnoreCase("first")) {
@@ -102,7 +102,7 @@ public class TakeBet {
 			do {
 				System.out.print("Input the section third [first, second, third] --> ");
 				input = in.nextLine();
-			} while(!(input.equalsIgnoreCase("first") && input.equalsIgnoreCase("second") && input.equalsIgnoreCase("third")));
+			} while(!(input.equalsIgnoreCase("first") ^ input.equalsIgnoreCase("second") ^ input.equalsIgnoreCase("third")));
 			
 			Sections sectionChoice = null;
 			if(input.equalsIgnoreCase("first")) {
@@ -142,7 +142,7 @@ public class TakeBet {
 			do {
 				System.out.print("Input the half [first, second] --> ");
 				input = in.nextLine();
-			} while(!(input.equalsIgnoreCase("first") && input.equalsIgnoreCase("second")));
+			} while(!(input.equalsIgnoreCase("first") ^ input.equalsIgnoreCase("second")));
 			
 			Halves chosenHalf = null;
 			if(input.equalsIgnoreCase("first")) {
@@ -179,6 +179,8 @@ public class TakeBet {
 			}
 			
 		} while(amt == 0);
+		
+		player.updateHoldings(-1 * amt);
 		
 		return amt;
 	}

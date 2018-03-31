@@ -58,9 +58,16 @@ public class Player {
 	}
 	
 	public void distributeBetStuff(HashMap<BetOptions, Integer> results, int numberRolled) {
+		long total = 0;
 		for(PlacedBet bet : placedBet) {
-			holdings += bet.returnResult(results, numberRolled);
+			total += bet.returnResult(results, numberRolled);
 		}
+		System.out.println("\n"+name);
+		System.out.println("Your bet results in: $"+total);
+		System.out.println("Your current holdings are: $"+(holdings+total)+"\n");
+		holdings += total;
+		
+		resetBets();
 	}
 	
 	public String toString() {
