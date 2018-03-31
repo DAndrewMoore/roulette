@@ -30,16 +30,28 @@ public class Player {
 		return holdings;
 	}
 	
+	public void updateCurrentBetTotal(long updateVal) {
+		currentBetAmount += updateVal;
+	}
+	
+	public boolean getCanBetAlreadyBet() {
+		return (holdings - currentBetAmount) > 0;
+	}
+	
 	public long getHoldingsMinusBet() {
 		return holdings - currentBetAmount;
 	}
 	
+	public long getCurrentBet() {
+		return currentBetAmount;
+	}
+	
 	public boolean getCanPlaceBet(long amt2bet) {
-		return holdings >= amt2bet;
+		return (holdings - currentBetAmount) >= amt2bet;
 	}
 	
 	public boolean getCanBet() {
-		return (holdings - currentBetAmount) >= 0;
+		return holdings > 0;
 	}
 	
 	public void updateHoldings(long updateVal) {

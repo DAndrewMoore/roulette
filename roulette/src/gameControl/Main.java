@@ -16,7 +16,7 @@ public class Main {
 	private static final Table tbl = new Table();
 
 	public static void main(String[] args) throws Exception {
-		
+		driver();
 	}
 	
 	public static void driver() throws Exception {
@@ -31,6 +31,11 @@ public class Main {
 					playerList.remove(curPlayerIdx);
 					curPlayerIdx--;
 				}
+			}
+			
+			if(playerList.isEmpty()) {
+				System.out.println("All players have been removed from the game");
+				break;
 			}
 			
 			// Get the random number

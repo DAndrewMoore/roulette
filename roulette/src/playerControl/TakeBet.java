@@ -16,24 +16,29 @@ public class TakeBet {
 	public static void takeBetsFromCurrentPlayer(Player player, Scanner in) {
 		int curOptSelect = -1;
 		do {
-			System.out.println("Select the betting option");
+			System.out.println("\nSelect the betting option");
 			System.out.println("1 --> Even or Odd");
 			System.out.println("2 --> Red or Black");
 			System.out.println("3 --> Column Number");
 			System.out.println("4 --> Section Number");
 			System.out.println("5 --> Specific Numbers");
 			System.out.println("6 --> Board Half");
+			System.out.println("7 --> Display Current Holdings and Bets");
 			System.out.println("0 --> Finish Betting");
 			System.out.print("==>");
 			try {
 				curOptSelect = Integer.parseInt(in.nextLine());
-				if(curOptSelect < 0 || curOptSelect > 5) {
+				if(curOptSelect < 0 || curOptSelect > 7) {
 					throw new Exception();
 				} else {
 					execOption(player, in, curOptSelect);
 				}
 			} catch(Exception e) {
 				System.err.println("Enter a number between 0 and 5");
+			}
+			
+			if(!player.getCanBetAlreadyBet()) {
+				break;
 			}
 			
 		} while(curOptSelect != 0);
@@ -154,7 +159,10 @@ public class TakeBet {
 			amount = getAmount(player, in);
 			
 			player.addBet(new PlacedBet(chosenHalf, amount));
-			
+		break;
+		case 7:
+			System.out.println("Current holdings: "+player.getHoldings());
+			System.out.println("Current bet amounts: "+player.getCurrentBet());
 		break;
 		default:
 		}
@@ -174,13 +182,12 @@ public class TakeBet {
 					amt = tmpLng;
 				}
 			} catch(Exception e) {
-				System.err.println("Enter a valid amount above 0");
-				System.err.println("Your current balance is: "+player.getHoldingsMinusBet());
+				System.out.println("\nEnter a valid amount above 0");
+				System.out.println("Your current balance is: "+player.getHoldingsMinusBet());
+				System.out.println();
 			}
 			
 		} while(amt == 0);
-		
-		player.updateHoldings(-1 * amt);
 		
 		return amt;
 	}
