@@ -16,9 +16,7 @@ public class Main {
 	private static final Table tbl = new Table();
 
 	public static void main(String[] args) throws Exception {
-		for(int i=0; i<100; i++) {
-			System.out.println(tbl.getRandomNumber());
-		}
+		
 	}
 	
 	public static void driver() throws Exception {
@@ -37,6 +35,7 @@ public class Main {
 			
 			// Get the random number
 			int num = tbl.getRandomNumber();
+			System.out.println("\nThe Rolled number is: "+num+"\n");
 			
 			// Calculate results
 			HashMap<BetOptions, Integer> results = tbl.getResults(num);
