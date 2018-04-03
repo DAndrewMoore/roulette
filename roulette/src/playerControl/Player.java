@@ -3,7 +3,6 @@ package playerControl;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
 
 import roulette.PlacedBet;
 import roulette.bettingOpts.BetOptions;
@@ -63,6 +62,10 @@ public class Player {
 		currentBetAmount = 0;
 	}
 	
+	public int getNumBets() {
+		return placedBet.size();
+	}
+	
 	public void addBet(PlacedBet pb) {
 		System.out.println("This bet's unique identifier is "+name+(placedBet.size()+1));
 		placedBet.add(pb);
@@ -88,5 +91,17 @@ public class Player {
 	
 	public boolean equals(int uuid) {
 		return this.uuid == uuid;
+	}
+
+	public boolean deleteBet(String inStr) {
+		boolean found = false;
+		for(int i=0; i<placedBet.size() && !found; i++) {
+			if(placedBet.get(i).equals(inStr)) {
+				placedBet.remove(i);
+				found = true;
+			}
+		}
+		
+		return found;
 	}
 }

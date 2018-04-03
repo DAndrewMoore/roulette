@@ -24,17 +24,18 @@ public class TakeBet {
 			System.out.println("5 --> Specific Numbers");
 			System.out.println("6 --> Board Half");
 			System.out.println("7 --> Display Current Holdings and Bets");
+			System.out.println("8 --> Delete previous bet");
 			System.out.println("0 --> Finish Betting");
 			System.out.print("==>");
 			try {
 				curOptSelect = Integer.parseInt(in.nextLine());
-				if(curOptSelect < 0 || curOptSelect > 7) {
+				if(curOptSelect < 0 || curOptSelect > 8) {
 					throw new Exception();
 				} else {
 					execOption(player, in, curOptSelect);
 				}
 			} catch(Exception e) {
-				System.err.println("Enter a number between 0 and 5");
+				System.err.println("Enter a number between 0 and 8");
 			}
 			
 			if(!player.getCanBetAlreadyBet()) {
@@ -45,6 +46,7 @@ public class TakeBet {
 	}
 	
 	private static void execOption(Player player, Scanner in, int option) {
+		String betID = player.getName()+player.getNumBets();
 		String input = "";
 		long amount = 0L;
 		switch(option) {
@@ -63,7 +65,7 @@ public class TakeBet {
 			
 			amount = getAmount(player, in);
 			
-			player.addBet(new PlacedBet(evenOrOddChoice, amount));
+			player.addBet(new PlacedBet(evenOrOddChoice, amount, betID));
 		break;
 		case 2:
 			do {
@@ -80,7 +82,7 @@ public class TakeBet {
 			
 			amount = getAmount(player, in);
 			
-			player.addBet(new PlacedBet(colorChoice, amount));
+			player.addBet(new PlacedBet(colorChoice, amount, betID));
 		break;
 		case 3:
 			// Column
@@ -100,7 +102,7 @@ public class TakeBet {
 			
 			amount = getAmount(player, in);
 			
-			player.addBet(new PlacedBet(columnChoice, amount));
+			player.addBet(new PlacedBet(columnChoice, amount, betID));
 		break;
 		case 4:
 			// Section
@@ -120,7 +122,7 @@ public class TakeBet {
 			
 			amount = getAmount(player, in);
 			
-			player.addBet(new PlacedBet(sectionChoice, amount));
+			player.addBet(new PlacedBet(sectionChoice, amount, betID));
 		break;
 		case 5:
 			// Numbers
@@ -139,7 +141,7 @@ public class TakeBet {
 				}
 			} while(!input.equalsIgnoreCase("stop"));
 			
-			player.addBet(new PlacedBet( (Integer[]) chosenNumberList.toArray(), (Long[]) betAmounts.toArray()));
+			player.addBet(new PlacedBet( (Integer[]) chosenNumberList.toArray(), (Long[]) betAmounts.toArray(), betID ));
 			
 		break;
 		case 6:
@@ -158,11 +160,14 @@ public class TakeBet {
 			
 			amount = getAmount(player, in);
 			
-			player.addBet(new PlacedBet(chosenHalf, amount));
+			player.addBet(new PlacedBet(chosenHalf, amount, betID));
 		break;
 		case 7:
 			System.out.println("Current holdings: "+player.getHoldings());
 			System.out.println("Current bet amounts: "+player.getCurrentBet());
+		break;
+		case 8:
+			getBetToDelete(player, in);
 		break;
 		default:
 		}
@@ -190,5 +195,19 @@ public class TakeBet {
 		} while(amt == 0);
 		
 		return amt;
+	}
+	
+	private static void getBetToDelete(Player player, Scanner in) {
+		boolean foundBet = false;
+		do {
+			System.out.println("Enter the bet ID to delete or \"stop\" to cancel --> ");
+			String inStr = in.nextLine();
+			if(!inStr.equalsIgnoreCase("stop")) {
+				foundBet = player.deleteBet(inStr);
+			} else {
+				break;
+			}
+			
+		} while(!foundBet);
 	}
 }

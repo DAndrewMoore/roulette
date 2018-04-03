@@ -14,6 +14,7 @@ public class PlacedBet {
 	private BetOptions betCategory;
 	private long amount;
 	private Long[] multiNumBetAmt;
+	private String betID;
 	
 	// Optional Fields
 	private Integer[] chosenNumbers;
@@ -24,40 +25,46 @@ public class PlacedBet {
 	private EvenOrOdd evenOrOdd;
 	
 	
-	public PlacedBet(Colors color, long amt) {
+	public PlacedBet(Colors color, long amt, String betID) {
 		this.betCategory = BetOptions.Color;
 		this.chosenColor = color;
 		this.amount = amt;
+		this.betID = betID;
 	}
 	
-	public PlacedBet(Integer[] chosenNumbers, Long[] amt) {
+	public PlacedBet(Integer[] chosenNumbers, Long[] amt, String betID) {
 		this.betCategory = BetOptions.SpecificNumbers;
 		this.chosenNumbers = chosenNumbers;
 		this.multiNumBetAmt = amt;
+		this.betID = betID;
 	}
 	
-	public PlacedBet(Columns column, long amt) {
+	public PlacedBet(Columns column, long amt, String betID) {
 		this.betCategory = BetOptions.ColumnNumber;
 		this.column = column;
 		this.amount = amt;
+		this.betID = betID;
 	}
 	
-	public PlacedBet(Sections section, long amt) {
+	public PlacedBet(Sections section, long amt, String betID) {
 		this.betCategory = BetOptions.SectionNumber;
 		this.section = section;
 		this.amount = amt;
+		this.betID = betID;
 	}
 	
-	public PlacedBet(Halves half, long amt) {
+	public PlacedBet(Halves half, long amt, String betID) {
 		this.betCategory = BetOptions.Half;
 		this.half = half;
 		this.amount = amt;
+		this.betID = betID;
 	}
 	
-	public PlacedBet(EvenOrOdd eOo, long amt) {
+	public PlacedBet(EvenOrOdd eOo, long amt, String betID) {
 		this.betCategory = BetOptions.EvenOrOdd;
 		this.evenOrOdd = eOo;
 		this.amount = amt;
+		this.betID = betID;
 	}
 	
 	public long getBetAmount() {
@@ -110,5 +117,9 @@ public class PlacedBet {
 		}
 		
 		return total;
+	}
+	
+	public boolean equals(String id) {
+		return this.betID.equals(id);
 	}
 }
